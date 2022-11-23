@@ -34,8 +34,8 @@ public class PlayerCtrl : MonoBehaviour {
     void Jump () {
         if (state == State.GROUND) {
             if (Input.GetKeyDown(KeyCode.Space)) {
-                //rigid.velocity = new Vector3(0,0,0);
                 rigid.AddForce(new Vector3(0, 300, 0));
+                //force to vector front (x, y)
             }
         }
     }
@@ -47,6 +47,7 @@ public class PlayerCtrl : MonoBehaviour {
             rigid.velocity = vec;
             //가속을 없애고 싶을 때?
             //이동 방식을 좌 우 키 입력으로 수정하기
+            //velocity/addforce/translate
         }
     }
     void Rotate () {
