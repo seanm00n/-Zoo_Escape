@@ -6,7 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour {
-    public int speed = 10;
+    public float speed = 10f;
+    public float rotSpeed = 100f;
     public LayerMask floorLayerMask;
     public LayerMask portalLayerMask;
 
@@ -19,10 +20,12 @@ public class PlayerCtrl : MonoBehaviour {
     }
     void Movement () {
         float h = Input.GetAxis("Horizontal");
-        Vector3 vec = new Vector3(h, 0, 0);
         if (h != 0) {
             transform.Translate(Vector3.right*h*speed*Time.deltaTime, Space.Self); //완성!
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(vec), 100f);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Vector3.up * h, 100f);
+            //Vector3.up 활용 해보자!
+            transform.Rotate(Vector3.up*h*rotSpeed);
+
         }
         
         if (Input.GetKeyDown(KeyCode.Space)) {
