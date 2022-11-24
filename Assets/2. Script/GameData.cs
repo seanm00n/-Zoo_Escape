@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace GameData
 {
-    public enum STATE { IDLE, RUN, JUMP, ATTACK, DIE, HIT };
+    public enum STATE { IDLE, RUN, JUMP, ATTACK_A,ATTACK_B,ATTACK_C, DIE, HIT };
 }
