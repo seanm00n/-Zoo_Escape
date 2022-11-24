@@ -4,12 +4,18 @@ using System.Transactions;
 using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using GameData;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerCtrl : MonoBehaviour {
+    
     public float speed = 10f;
     public float rotSpeed = 100f;
     public LayerMask floorLayerMask;
     public LayerMask portalLayerMask;
+
+    private float h;
 
     Rigidbody rigid;
     void Start () {
@@ -19,37 +25,33 @@ public class PlayerCtrl : MonoBehaviour {
         Movement();
     }
     void Movement () {
-        Vector3 lookDirection;
-        if (Input.GetKey(KeyCode.LeftArrow) ||
-            Input.GetKey(KeyCode.RightArrow) ||
-            Input.GetKey(KeyCode.UpArrow) ||
-            Input.GetKey(KeyCode.DownArrow))
-        {
-            float xx = Input.GetAxisRaw("Vertical");
-            float zz = Input.GetAxisRaw("Horizontal");
-            lookDirection = xx * Vector3.forward + zz * Vector3.right;
-
-            this.transform.rotation = Quaternion.LookRotation(lookDirection);
-            this.transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        h = Input.GetAxis("Horizontal");
+        if (h != 0) {
+            transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self); //move
+            //rotate
         }
-        //Vector3 dir = h * Vector3.right;
-        //if (h != 0) {
-        //    transform.Translate((h > 0 ? Vector3.forward : -Vector3.forward) * h * speed * Time.deltaTime, Space.Self); //¿Ï¼º!
-        //    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * 10f);
-        //    transform.rotation = Quaternion.LookRotation(dir, -dir);
-        //    transform.Rotate(h > 0 ? Vector3.up : Vector3.down);
-        //}
-        
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            //force to vector front (x, y) to jump
+
+        if (Input.GetKeyDown(KeyCode.Space)) { //force vector3(x, y) to jump
+        }
+
+        if (Input.GetKeyDown(KeyCode.W)) //attack
+        {
+
         }
     }
     private void OnTriggerStay (Collider other) {
-        Debug.Log("Portal");
-        if (Input.GetKeyDown(KeyCode.G)) {
-            Debug.Log("Pressed G Button");
-            other.GetComponent<PortalCtrl>().MoveToTarget(transform);
+        if(other.gameObject.tag == "Portal")
+        {
+            if (Input.GetKeyDown(KeyCode.G)) {
+                Debug.Log("Pressed G Button");
+                MoveToTarget(other);
+            }
         }
-        //need frame check
+    }
+    void MoveToTarget(Collider other)
+    {
+        PortalCtrl otherComp = other.GetComponent<PortalCtrl>();
+        transform.position = otherComp.target.position;
+        transform.rotation = otherComp.target.rotation;
     }
 }
