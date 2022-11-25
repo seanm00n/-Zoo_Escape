@@ -14,7 +14,7 @@ public class PlayerCtrl : MonoBehaviour {
     public STATE state = STATE.IDLE;
     public LayerMask floorLayerMask;
     public LayerMask portalLayerMask;
-
+    [SerializeField] float jumpSpeed = 500;
     const int maxStemina = 100;
     const int maxHp = 100;
 
@@ -37,24 +37,15 @@ public class PlayerCtrl : MonoBehaviour {
     }
     void Movement () {
         h = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space)) { //space 입력 했을 때
-            if (!isActing) { //바닥에 있으면
-                rigid.AddForce(new Vector3(300, 500, 0)); //점프
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (!isActing) {
+                rigid.AddRelativeForce(new Vector3(jumpSpeed, jumpSpeed, 0)); //jump. rotate 수정 필요
                 isActing = true;
             }
         }
-        Debug.DrawRay(transform.position,-transform.up,Color.red,rayDistance);
-        if(isActing && Physics.Raycast(transform.position, -transform.up, rayDistance, floorLayerMask)) {
-            isActing = false; //너무 빨리 작동해서 이동이 동작 가능해져 버림, oncoll함수로 변경
-        }
-        
-        if (Input.GetKeyDown(KeyCode.W))   {
-            return;
-        }
 
-        if (h != 0 && isActing != true ) { //점프중 이동되는 버그
+        if (h != 0 && isActing == false ) {//점프 시 이동 잠금
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self); //move
-            
             //add rotate
         }
     }
@@ -67,10 +58,15 @@ public class PlayerCtrl : MonoBehaviour {
             }
         }
     }
+    private void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.tag == "Floor")
+            isActing = false;
+    }
     void MoveToTarget(Collider other)
     {
         PortalCtrl otherComp = other.GetComponent<PortalCtrl>();
         transform.position = otherComp.target.position;
         transform.rotation = otherComp.target.rotation;
     }
+
 }
