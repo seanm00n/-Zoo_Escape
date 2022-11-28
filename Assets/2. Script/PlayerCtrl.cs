@@ -14,15 +14,16 @@ public class PlayerCtrl : MonoBehaviour {
     public STATE state = STATE.IDLE;
     public LayerMask floorLayerMask;
     public LayerMask portalLayerMask;
+
     [SerializeField] float jumpSpeed = 500;
+
     const int maxStemina = 100;
     const int maxHp = 100;
 
     float speed = 10f;
-    float rayDistance = 1.05f;
-    float h;
+    float h; //Axis for Horizontal
 
-    int stemina = 0;
+    int stemina;
     int hp;
 
     bool isActing = false;
@@ -30,6 +31,8 @@ public class PlayerCtrl : MonoBehaviour {
 
     void Start () {
         rigid = GetComponent<Rigidbody>();
+        stemina = maxStemina;
+        hp = maxHp;
     }
     void Update () {
         Movement();
@@ -50,8 +53,7 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
     private void OnTriggerStay (Collider other) {
-        if(other.gameObject.tag == "Portal")
-        {
+        if(other.gameObject.tag == "Portal") {
             if (Input.GetKeyDown(KeyCode.G)) {
                 Debug.Log("Pressed G Button");
                 MoveToTarget(other);
@@ -59,14 +61,11 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
     private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.tag == "Floor")
-            isActing = false;
+        if(collision.gameObject.tag == "Floor") isActing = false;
     }
-    void MoveToTarget(Collider other)
-    {
+    void MoveToTarget(Collider other) {
         PortalCtrl otherComp = other.GetComponent<PortalCtrl>();
         transform.position = otherComp.target.position;
         transform.rotation = otherComp.target.rotation;
     }
-
 }
