@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4571565601861753625}
   - component: {fileID: 2140456300396437669}
   m_Layer: 7
-  m_Name: Wall2
+  m_Name: LWall2
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4696412303475875141}
   - component: {fileID: 4696412303475875140}
   m_Layer: 7
-  m_Name: Wall1
+  m_Name: LWall1
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

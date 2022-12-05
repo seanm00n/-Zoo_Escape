@@ -5,34 +5,33 @@ using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using GameData;
 using static UnityEngine.GraphicsBuffer;
 using Newtonsoft.Json.Serialization;
 
 public class PlayerCtrl : MonoBehaviour {
+    enum STATE { IDLE, RUN, JUMP, ATTACK_A, ATTACK_B, ATTACK_C, DIE, HIT };
 
-    public STATE state = STATE.IDLE;
-    public LayerMask floorLayerMask;
-    public LayerMask portalLayerMask;
+    STATE state = STATE.IDLE;
 
-    [SerializeField] float jumpSpeed = 500;
-
-    const int maxStemina = 100;
-    const int maxHp = 100;
-
-    float speed = 10f;
-    float h; //Axis for Horizontal
-
-    int stemina;
-    int hp;
-
-    bool isActing = false;
     Rigidbody rigid;
 
+    public LayerMask floorLayerMask;
+    public LayerMask portalLayerMask;
+    [HideInInspector] public int playerAP = 1; //const
+    int playerHp;
+    const int maxStemina = 100;
+    const int playerDefaultHp = 5;
+    float jumpSpeed = 500;
+    float speed = 10f;
+    float h; //Axis for Horizontal
+    int stemina;
+    
+    bool isActing = false;
+    
     void Start () {
         rigid = GetComponent<Rigidbody>();
         stemina = maxStemina;
-        hp = maxHp;
+        playerHp = playerDefaultHp;
     }
     void Update () {
         Movement();
@@ -61,7 +60,7 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
     private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.tag == "Floor") isActing = false;
+        if(collision.gameObject.tag == "Floor") isActing = false; //연속 점프, 점프중 이동 방지
     }
     void MoveToTarget(Collider other) {
         PortalCtrl otherComp = other.GetComponent<PortalCtrl>();
