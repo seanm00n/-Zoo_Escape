@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class GameManamger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+    public Transform[] spawnPointA;
+    public Transform[] spawnPointB;
+    public Transform[] spawnPointC;
+    public GameObject monsterAPref;
+    private void Start () {
+        //Instantiate(monsterA);
         
     }
 }

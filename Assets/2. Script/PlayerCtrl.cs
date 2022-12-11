@@ -7,6 +7,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 using Newtonsoft.Json.Serialization;
+using System.ComponentModel;
+using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour {
     enum STATE { IDLE, RUN, JUMP, ATTACK_A, ATTACK_B, ATTACK_C, DIE, HIT };
@@ -25,17 +27,19 @@ public class PlayerCtrl : MonoBehaviour {
     float speed = 10f;
     float h; //Axis for Horizontal
     int stemina;
-    
+    Animator animator;
     bool isActing = false;
+    bool isDie = false;
     
     void Start () {
         rigid = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         stemina = maxStemina;
         playerHp = playerDefaultHp;
     }
     void Update () {
+        if (isDie) { return; }
         Movement();
-        if(isActing) Debug.Log("Acting");
     }
     void Movement () {
         h = Input.GetAxis("Horizontal");
@@ -51,11 +55,27 @@ public class PlayerCtrl : MonoBehaviour {
             //add rotate
         }
     }
+    void PlayerDie () {
+        Debug.Log("Player Die!!");
+        isDie = true;
+        animator.SetBool("Die", true);
+        
+    }
     private void OnTriggerStay (Collider other) {
         if(other.gameObject.tag == "Portal") {
             if (Input.GetKeyDown(KeyCode.G)) {
                 Debug.Log("Pressed G Button");
                 MoveToTarget(other);
+            }
+        }
+        if(other.gameObject.tag == "MonsterAttack") {
+            playerHp -= 1;
+            //imgHpBar.fillAmount = (float)hp / (float)initHp;
+            //Debug.Log("Player HP = " + hp.ToString());
+            if (playerHp <= 0) {
+                PlayerDie();
+            } else {
+                animator.SetTrigger("Hit");
             }
         }
     }
