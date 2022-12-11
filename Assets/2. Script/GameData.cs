@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameData
+/*amespace GameData
 {
-    public enum STATE { IDLE, RUN, JUMP, ATTACK_A,ATTACK_B,ATTACK_C, DIE, HIT };
+    public enum STATE { IDLE, JUMP, ATTACK_All,ATTACK_L,ATTACK_R, KICK_L, KICk_R, DIE, HIT };
 }
+*/
+                                                                        
