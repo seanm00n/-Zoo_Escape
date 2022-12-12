@@ -28,22 +28,33 @@ public class PlayerCtrl : MonoBehaviour {
     
     Vector3 destinationPosision;
     Quaternion destinationRotation;
+
+    Quaternion leftRotationH;
+    Quaternion RightRotationH;
+    Quaternion leftRotationV;
+    Quaternion RightRotationV;
     float speed = 10f;
     float h; //Axis for Horizontal
     
     Animator animator;
     Rigidbody rigid;
+    GameObject child;
     bool isDie = false;
     bool isPortalEnter = false;
+    bool isHorizontal = true;
     
     void Start () {
         rigid = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        child = transform.GetChild(0).gameObject;
 
         playerAP = playerDefaultAP;
         playerHp = playerDefaultHp;
         playerStamina = playerDefaultStamina;
-        
+        RightRotationH =  Quaternion.Euler(0, 90, 0);
+        leftRotationH = Quaternion.Euler(0, -90, 0);
+        RightRotationV = Quaternion.Euler(0, 180, 0);
+        leftRotationV = Quaternion.Euler(0, 0, 0);
         destinationPosision = Vector3.zero;
         destinationRotation = Quaternion.identity;
     }
@@ -61,9 +72,20 @@ public class PlayerCtrl : MonoBehaviour {
         if (h < -0.1f) {//Left
             animator.SetBool("Move", true);
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
+            if (isHorizontal) {
+                child.transform.rotation = leftRotationH;
+            } else {
+                child.transform.rotation = leftRotationV;
+            }
         } else if(h > 0.1f){//Right
             animator.SetBool("Move", true);
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
+            if (isHorizontal) {
+                child.transform.rotation = RightRotationH;
+            } else {
+                child.transform.rotation = RightRotationV;
+            }
+            
         } else {//None
             animator.SetBool("Move", false);
         }
@@ -103,6 +125,7 @@ public class PlayerCtrl : MonoBehaviour {
             if (isPortalEnter) {
                 transform.position = destinationPosision;
                 transform.rotation = destinationRotation;
+                isHorizontal = !isHorizontal;
                 Debug.Log("Player::UsePortal move into " + destinationPosision);
             }
         }
