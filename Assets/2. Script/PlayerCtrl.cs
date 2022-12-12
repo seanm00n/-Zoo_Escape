@@ -11,12 +11,13 @@ using System.ComponentModel;
 using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour {
+
     [SerializeField] LayerMask floorLayerMask;
     [SerializeField] LayerMask portalLayerMask;
 
     int playerAP;
     const int playerDefaultAP = 1;
-    const int playerBurningAP = 100;
+    const int playerBurningAP = 3;
 
     int playerHp;
     const int playerDefaultHp = 5;
@@ -39,11 +40,18 @@ public class PlayerCtrl : MonoBehaviour {
     
     Animator animator;
     Rigidbody rigid;
-    GameObject child;
+    GameObject child; //index 0 GO
+
+    [SerializeField] SphereCollider lhColl;
+    [SerializeField] SphereCollider rhColl;
+    [SerializeField] SphereCollider ltColl;
+    [SerializeField] SphereCollider rtColl;
 
     bool isDie = false;
     bool isPortalEnter = false;
     bool isHorizontal = true;
+    bool isCoolTime = false;
+    bool isHit = false;
     
     void Start () {
         rigid = GetComponent<Rigidbody>();
@@ -61,6 +69,12 @@ public class PlayerCtrl : MonoBehaviour {
 
         destinationPosision = Vector3.zero;
         destinationRotation = Quaternion.identity;
+
+        lhColl.enabled = false;
+        rhColl.enabled = false;
+        ltColl.enabled = false;
+        rtColl.enabled = false;
+
     }
     void Update () {
         if (isDie) { return; }
@@ -69,27 +83,29 @@ public class PlayerCtrl : MonoBehaviour {
         Attack();
         UsePortal();
         CheckStamina();
-        
     }
     void Movement () { //need rotation
         h = Input.GetAxis("Horizontal");
         if (h < -0.1f) {//Left
             animator.SetBool("Move", true);
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
-            if (isHorizontal) {
-                child.transform.rotation = leftRotationH;
-            } else {
-                child.transform.rotation = leftRotationV;
+            if (!isCoolTime) {
+                if (isHorizontal) {
+                    child.transform.rotation = leftRotationH;
+                } else {
+                    child.transform.rotation = leftRotationV;
+                }
             }
         } else if(h > 0.1f){//Right
             animator.SetBool("Move", true);
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
-            if (isHorizontal) {
-                child.transform.rotation = RightRotationH;
-            } else {
-                child.transform.rotation = RightRotationV;
+            if (!isCoolTime) {
+                if (isHorizontal) {
+                    child.transform.rotation = RightRotationH;
+                } else {
+                    child.transform.rotation = RightRotationV;
+                }
             }
-            
         } else {//None
             animator.SetBool("Move", false);
         }
@@ -105,24 +121,47 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
     void Attack () {
-        if (Input.GetKeyDown(KeyCode.W)) {
-            animator.SetTrigger("Attack");
-            Debug.Log("Player::Attack");
-            //쿨타임 넣으려면 bool check 후 coroutine 실행
+        if (!isCoolTime) {
+            if (Input.GetKeyDown(KeyCode.W)) {
+                animator.SetTrigger("Attack_W");
+                lhColl.enabled = true;
+                Debug.Log("Player::Attack_W");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(1f, lhColl));
+            }
+            if (Input.GetKeyDown(KeyCode.E)) {
+                animator.SetTrigger("Attack_E");
+                rhColl.enabled = true;
+                Debug.Log("Player::Attack_E");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(1f, rhColl));
+            }
+            if (Input.GetKeyDown(KeyCode.S)) {
+                animator.SetTrigger("Attack_S");
+                ltColl.enabled = true;
+                Debug.Log("Player::Attack_S");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(1.5f, ltColl));
+            }
+            if (Input.GetKeyDown(KeyCode.D)) {
+                animator.SetTrigger("Attack_D");
+                rtColl.enabled = true;
+                Debug.Log("Player::Attack_D");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(1.5f, rtColl));
+            }
         }
+    }
+    IEnumerator AttackCoolTime (float time, SphereCollider coll) {
+        yield return new WaitForSeconds(time);
+        isCoolTime = false;
+        coll.enabled = false;
     }
     void Die () {
         isDie = true;
         animator.SetBool("Die", true);
         Debug.Log("Player::Die");
         StopAllCoroutines();
-    }
-    void Hit (int damage) {
-        Debug.Log("Player::Hit");
-        playerHp -= damage;
-        if (playerHp < 0) {
-            Die();
-        }
     }
     void UsePortal () {
         if (Input.GetKeyDown(KeyCode.G)) {
@@ -163,9 +202,20 @@ public class PlayerCtrl : MonoBehaviour {
             destinationRotation = other.transform.rotation;
         }
         if (other.gameObject.tag == "MonsterAttack") {
-            int damage = other.GetComponent<MonsterCtrl>().GetMonsterAP();
-            Hit(damage);
+            if (!isHit) {
+                int damage = other.GetComponentInParent<MonsterCtrl>().GetMonsterAP(); //리소스 너무 많이먹음
+                other.enabled = false;
+                isHit = true;
+                StartCoroutine(Hit(damage));
+            }
         }
+    }
+    IEnumerator Hit (int damage) {
+        playerHp -= damage;
+        Debug.Log("Player::Hit");
+        if (playerHp < 0) Die();
+        yield return new WaitForSeconds(0.5f);
+        isHit = false;
     }
     private void OnTriggerExit (Collider other) {
         if (other.gameObject.tag == "Portal") {

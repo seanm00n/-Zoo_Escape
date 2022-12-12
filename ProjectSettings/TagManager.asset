@@ -6,11 +6,9 @@ TagManager:
   tags:
   - Portal
   - Floor
-  - Wall
   - Monster
   - MonsterAttack
   - PlayerAttack
-  - DeadLine
   layers:
   - Default
   - TransparentFX
