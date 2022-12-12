@@ -8,7 +8,7 @@ public class MonsterCtrl : MonoBehaviour
 {
     enum MonsterState { Idle, Trace, Attack, Die };
     MonsterState monsterState = MonsterState.Idle;
-
+    
     GameObject target;
     NavMeshAgent agent;
     Animator animator;
@@ -17,7 +17,8 @@ public class MonsterCtrl : MonoBehaviour
 
     [SerializeField] CapsuleCollider monsterAttackColl;
     
-    int monsterAP = 1;
+    const int monsterAP = 1;
+
     int monsterHP;
     const int monsterDefaultHP = 3;
     const float attackDist = 3f;
