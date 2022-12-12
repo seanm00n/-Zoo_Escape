@@ -14,7 +14,7 @@ public class MonsterCtrl : MonoBehaviour
     Animator animator;
     PlayerCtrl player;
 
-    int monsterAP = 1;
+    [HideInInspector] public int monsterAP = 1;
     int monsterHP;
     const int monsterDefaultHP = 5;
     const float attackDist = 3f;

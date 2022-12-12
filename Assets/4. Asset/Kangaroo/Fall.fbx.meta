@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 39bebbad8c94f7841b099407fa4f9674
+guid: 992a2bde84a782b4e888e11ed8873d60
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: R_punch
+    second: die
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -36,11 +36,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: R_punch
+      name: die
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 75
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

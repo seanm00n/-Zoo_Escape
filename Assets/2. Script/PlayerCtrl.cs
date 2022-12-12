@@ -11,80 +11,96 @@ using System.ComponentModel;
 using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour {
-    enum STATE { IDLE, RUN, JUMP, ATTACK_A, ATTACK_B, ATTACK_C, DIE, HIT };
-
-    STATE state = STATE.IDLE;
-
-    Rigidbody rigid;
-
     public LayerMask floorLayerMask;
     public LayerMask portalLayerMask;
     [HideInInspector] public int playerAP = 1; //const
-    int playerHp;
-    const int maxStemina = 100;
     const int playerDefaultHp = 5;
-    float jumpSpeed = 500;
+    int playerHp;
+    Vector3 destinationPosision;
+    Quaternion destinationRotation;
+    //const int maxStemina = 100;
+    
     float speed = 10f;
     float h; //Axis for Horizontal
-    int stemina;
+    //int stemina;
     Animator animator;
-    bool isActing = false;
+    Rigidbody rigid;
     bool isDie = false;
+    bool isPortalEnter = false;
     
     void Start () {
         rigid = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        stemina = maxStemina;
         playerHp = playerDefaultHp;
+        //stemina = maxStemina;
+        destinationPosision = Vector3.zero;
+        destinationRotation = Quaternion.identity;
     }
     void Update () {
         if (isDie) { return; }
         Movement();
+        Jumping();
+        Attack();
+        UsePortal();
+        //rotation
     }
     void Movement () {
         h = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            if (!isActing) {
-                rigid.AddRelativeForce(new Vector3(jumpSpeed, jumpSpeed, 0)); //jump. rotate 수정 필요
-                isActing = true;
-            }
-        }
-
-        if (h != 0 && isActing == false ) {//점프 시 이동 잠금
-            transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self); //move
-            //add rotate
+        if (h < -0.1f) {//Left
+            animator.SetBool("Move", true);
+            transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
+        } else if(h > 0.1f){//Right
+            animator.SetBool("Move", true);
+            transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
+        } else {//None
+            animator.SetBool("Move", false);
         }
     }
-    void PlayerDie () {
-        Debug.Log("Player Die!!");
+    void Jumping () {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            bool isGround = Physics.Raycast(transform.position, Vector3.down, 1.0f, floorLayerMask);
+            if (isGround) {
+                animator.SetTrigger("Jump");
+                rigid.AddRelativeForce(new Vector3(0, 500f, 0)); //jump. rotate 수정 필요
+            }
+        }
+    }
+    void Attack () {
+        if (Input.GetKeyDown(KeyCode.W)) {
+            animator.SetTrigger("Attack");
+        }
+    }
+    void Die () {
         isDie = true;
         animator.SetBool("Die", true);
-        
     }
-    private void OnTriggerStay (Collider other) {
-        if(other.gameObject.tag == "Portal") {
-            if (Input.GetKeyDown(KeyCode.G)) {
-                Debug.Log("Pressed G Button");
-                MoveToTarget(other);
+    void Hit (int damage) {
+        Debug.Log("Player Hit");
+        playerHp -= damage;
+        if (playerHp < 0) {
+            Die();
+        }
+    }
+    void UsePortal () {
+        if (Input.GetKeyDown(KeyCode.G)) {
+            if (isPortalEnter) {
+                transform.position = destinationPosision;
+                transform.rotation = destinationRotation;
             }
+        }
+    }
+    private void OnTriggerEnter (Collider other) {
+        if(other.gameObject.tag == "Portal") { //포탈이면 좌표,회전값 복사
+            isPortalEnter = true;
+            destinationPosision = other.transform.position;
+            destinationRotation = other.transform.rotation;
         }
         if(other.gameObject.tag == "MonsterAttack") {
-            playerHp -= 1;
-            //imgHpBar.fillAmount = (float)hp / (float)initHp;
-            //Debug.Log("Player HP = " + hp.ToString());
-            if (playerHp <= 0) {
-                PlayerDie();
-            } else {
-                animator.SetTrigger("Hit");
-            }
+            int damage = other.GetComponent<MonsterCtrl>().monsterAP;
+            Hit(damage);
         }
     }
-    private void OnCollisionEnter(Collision collision) {
-        if(collision.gameObject.tag == "Floor") isActing = false; //연속 점프, 점프중 이동 방지
-    }
-    void MoveToTarget(Collider other) {
-        PortalCtrl otherComp = other.GetComponent<PortalCtrl>();
-        transform.position = otherComp.target.position;
-        transform.rotation = otherComp.target.rotation;
+    private void OnTriggerExit (Collider other) {
+        if (other.gameObject.tag == "Portal") isPortalEnter = false;
     }
 }
