@@ -23,6 +23,7 @@ public class MonsterCtrl : MonoBehaviour
     const float attackDist = 3f;
     const float traceDist = 20f;
     bool isDie = false;
+    bool isAttack = false;
 
     private void Start () {
         target = GameObject.Find("Player");
@@ -66,13 +67,21 @@ public class MonsterCtrl : MonoBehaviour
                     monsterAttackColl.enabled = false;
                     break;
                 case MonsterState.Attack:
-                    agent.isStopped = true;
-                    animator.SetBool("IsAttack", true);
-                    monsterAttackColl.enabled = true;
+                    if (!isAttack) {
+                        agent.isStopped = true;
+                        animator.SetBool("IsAttack", true);
+                        monsterAttackColl.enabled = true;
+                        isAttack = true;
+                        StartCoroutine(CoolTime());
+                    }
                     break;
             }
             yield return null;
         }
+    }
+    IEnumerator CoolTime () {
+        yield return new WaitForSeconds(1f);
+        isAttack = false;
     }
     private void OnTriggerEnter (Collider other) {
         if (other.gameObject.tag == "PlayerAttack") {
@@ -98,7 +107,7 @@ public class MonsterCtrl : MonoBehaviour
         rigid.constraints = RigidbodyConstraints.None;//no freeze
         rigid.isKinematic = false;
         Vector3 flyVector = new Vector3(Random.Range(-1, 2), 2f, Random.Range(-1, 2));// 랜덤하게
-        rigid.AddForce(flyVector * 40f, ForceMode.Impulse);//날리기
+        rigid.AddForce(flyVector * 30f, ForceMode.Impulse);//날리기
         Destroy(gameObject,2f);
         Debug.Log("Monster::Die");
     }

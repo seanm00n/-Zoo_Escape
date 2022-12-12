@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: gothit
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4380309195526546327}
@@ -23,7 +23,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: afb6656e285fa31448bf79c0d6fb7c07, type: 3}
+  m_Motion: {fileID: 7400000, guid: 794421d5d97b0d846ae0f642391b11be, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -102,7 +102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: aed35c580cc595646b513968375a95d3, type: 2}
+  m_Motion: {fileID: 7400000, guid: afb6656e285fa31448bf79c0d6fb7c07, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -429,7 +429,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 885795a0812a46949bab0487df27861e, type: 3}
+  m_Motion: {fileID: 7400000, guid: 46d0b1354c1891d458a732548bb69bf6, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

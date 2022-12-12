@@ -51,6 +51,7 @@ public class PlayerCtrl : MonoBehaviour {
     bool isPortalEnter = false;
     bool isHorizontal = true;
     bool isCoolTime = false;
+    bool isHit = false;
     
     void Start () {
         rigid = GetComponent<Rigidbody>();
@@ -162,13 +163,6 @@ public class PlayerCtrl : MonoBehaviour {
         Debug.Log("Player::Die");
         StopAllCoroutines();
     }
-    void Hit (int damage) {
-        Debug.Log("Player::Hit");
-        playerHp -= damage;
-        if (playerHp < 0) {
-            Die();
-        }
-    }
     void UsePortal () {
         if (Input.GetKeyDown(KeyCode.G)) {
             if (isPortalEnter) {
@@ -208,10 +202,20 @@ public class PlayerCtrl : MonoBehaviour {
             destinationRotation = other.transform.rotation;
         }
         if (other.gameObject.tag == "MonsterAttack") {
-            int damage = other.GetComponentInParent<MonsterCtrl>().GetMonsterAP(); //리소스 너무 많이먹음
-            other.enabled = false;
-            Hit(damage);
+            if (!isHit) {
+                int damage = other.GetComponentInParent<MonsterCtrl>().GetMonsterAP(); //리소스 너무 많이먹음
+                other.enabled = false;
+                isHit = true;
+                StartCoroutine(Hit(damage));
+            }
         }
+    }
+    IEnumerator Hit (int damage) {
+        playerHp -= damage;
+        Debug.Log("Player::Hit");
+        if (playerHp < 0) Die();
+        yield return new WaitForSeconds(0.5f);
+        isHit = false;
     }
     private void OnTriggerExit (Collider other) {
         if (other.gameObject.tag == "Portal") {
