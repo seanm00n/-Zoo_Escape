@@ -15,7 +15,7 @@ public class MonsterCtrl : MonoBehaviour
     PlayerCtrl player;
     Rigidbody rigid;
 
-    [HideInInspector] public int monsterAP = 1;
+    int monsterAP = 1;
     int monsterHP;
     const int monsterDefaultHP = 5;
     const float attackDist = 3f;
@@ -95,4 +95,5 @@ public class MonsterCtrl : MonoBehaviour
         Vector3 flyVector = new Vector3(Random.Range(-1, 2), 1, Random.Range(-1, 2));// 랜덤하게
         rigid.AddForce(flyVector * 1000f, ForceMode.Impulse);//날리기
     }
+    public int GetMonsterAP() { return monsterAP; }
 }

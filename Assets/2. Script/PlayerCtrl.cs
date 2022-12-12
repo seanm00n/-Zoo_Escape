@@ -33,12 +33,14 @@ public class PlayerCtrl : MonoBehaviour {
     Quaternion RightRotationH;
     Quaternion leftRotationV;
     Quaternion RightRotationV;
+
     float speed = 10f;
     float h; //Axis for Horizontal
     
     Animator animator;
     Rigidbody rigid;
     GameObject child;
+
     bool isDie = false;
     bool isPortalEnter = false;
     bool isHorizontal = true;
@@ -51,10 +53,12 @@ public class PlayerCtrl : MonoBehaviour {
         playerAP = playerDefaultAP;
         playerHp = playerDefaultHp;
         playerStamina = playerDefaultStamina;
+
         RightRotationH =  Quaternion.Euler(0, 90, 0);
         leftRotationH = Quaternion.Euler(0, -90, 0);
         RightRotationV = Quaternion.Euler(0, 180, 0);
         leftRotationV = Quaternion.Euler(0, 0, 0);
+
         destinationPosision = Vector3.zero;
         destinationRotation = Quaternion.identity;
     }
@@ -159,7 +163,7 @@ public class PlayerCtrl : MonoBehaviour {
             destinationRotation = other.transform.rotation;
         }
         if (other.gameObject.tag == "MonsterAttack") {
-            int damage = other.GetComponent<MonsterCtrl>().monsterAP;
+            int damage = other.GetComponent<MonsterCtrl>().GetMonsterAP();
             Hit(damage);
         }
     }
