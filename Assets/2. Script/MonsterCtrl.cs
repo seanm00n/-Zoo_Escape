@@ -26,14 +26,13 @@ public class MonsterCtrl : MonoBehaviour
         target = GameObject.Find("Player");
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        rigid = GetComponent<Rigidbody>();
         player = target.GetComponent<PlayerCtrl>();
+        
         monsterHP = monsterDefaultHP;
 
         StartCoroutine(CheckMonsterState()); //no need update() func
         StartCoroutine(MonsterAction());
-    }
-    private void Update () {
-        Debug.Log(monsterState);
     }
     IEnumerator CheckMonsterState () {
         while (!isDie)
@@ -70,10 +69,11 @@ public class MonsterCtrl : MonoBehaviour
             yield return null;
         }
     }
-    private void OnCollisionEnter (Collision other) {
-        if(other.gameObject.tag == "PlayerAttack") {
+    private void OnTriggerEnter (Collider other) {
+        if (other.gameObject.tag == "PlayerAttack") {
             int playerAP = player.GetPlayerAP();
             monsterHP -= playerAP;
+            Debug.Log("Monster::Hit");
             player.AddStamina();
             if (monsterHP <= 0) {
                 Death();
@@ -82,6 +82,7 @@ public class MonsterCtrl : MonoBehaviour
             }
         }
         if (other.gameObject.tag == "DeadLine") {
+            Debug.Log("Monster::Destroy");
             Destroy(gameObject);
         }
     }
@@ -92,8 +93,10 @@ public class MonsterCtrl : MonoBehaviour
         agent.isStopped = true;
         animator.SetTrigger("IsDie");
         rigid.constraints = RigidbodyConstraints.None;//no freeze
-        Vector3 flyVector = new Vector3(Random.Range(-1, 2), 1, Random.Range(-1, 2));// 랜덤하게
-        rigid.AddForce(flyVector * 1000f, ForceMode.Impulse);//날리기
+        //Vector3 flyVector = new Vector3(Random.Range(-1, 2), 1, Random.Range(-1, 2));// 랜덤하게
+        Vector3 flyVector = new Vector3(0,1,0);
+        rigid.AddForce(flyVector * 300f, ForceMode.Impulse);//날리기
+        Debug.Log("Monster::Die");
     }
     public int GetMonsterAP() { return monsterAP; }
 }

@@ -11,6 +11,7 @@ using System.ComponentModel;
 using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour {
+
     [SerializeField] LayerMask floorLayerMask;
     [SerializeField] LayerMask portalLayerMask;
 
@@ -44,6 +45,7 @@ public class PlayerCtrl : MonoBehaviour {
     bool isDie = false;
     bool isPortalEnter = false;
     bool isHorizontal = true;
+    bool isCoolTime = false;
     
     void Start () {
         rigid = GetComponent<Rigidbody>();
@@ -89,7 +91,6 @@ public class PlayerCtrl : MonoBehaviour {
             } else {
                 child.transform.rotation = RightRotationV;
             }
-            
         } else {//None
             animator.SetBool("Move", false);
         }
@@ -105,11 +106,36 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
     void Attack () {
-        if (Input.GetKeyDown(KeyCode.W)) {
-            animator.SetTrigger("Attack");
-            Debug.Log("Player::Attack");
-            //쿨타임 넣으려면 bool check 후 coroutine 실행
+        if (!isCoolTime) {
+            if (Input.GetKeyDown(KeyCode.W)) {
+                animator.SetTrigger("Attack_W");
+                Debug.Log("Player::W Attack");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(0.5f));
+            }
+            if (Input.GetKeyDown(KeyCode.E)) {
+                animator.SetTrigger("Attack_E");
+                Debug.Log("Player::E Attack");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(0.5f));
+            }
+            if (Input.GetKeyDown(KeyCode.S)) {
+                animator.SetTrigger("Attack_S");
+                Debug.Log("Player::S Attack");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(1f));
+            }
+            if (Input.GetKeyDown(KeyCode.D)) {
+                animator.SetTrigger("Attack_D");
+                Debug.Log("Player::D Attack");
+                isCoolTime = true;
+                StartCoroutine(AttackCoolTime(1f));
+            }
         }
+    }
+    IEnumerator AttackCoolTime (float time) {
+        yield return new WaitForSeconds(time);
+        isCoolTime=false;
     }
     void Die () {
         isDie = true;
