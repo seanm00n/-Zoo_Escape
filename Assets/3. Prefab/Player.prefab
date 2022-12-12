@@ -196,7 +196,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeftUpLeg
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 4730027c433aae44f9a666098023e7ce, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4730027c433aae44f9a666098023e7ce, type: 3}
 --- !u!1 &4025057810024173566 stripped
 GameObject:

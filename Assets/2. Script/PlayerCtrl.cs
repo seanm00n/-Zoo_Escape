@@ -11,18 +11,26 @@ using System.ComponentModel;
 using UnityEngine.SceneManagement;
 
 public class PlayerCtrl : MonoBehaviour {
-    public LayerMask floorLayerMask;
-    public LayerMask portalLayerMask;
-    [HideInInspector] public int playerAP = 1; //const
-    const int playerDefaultHp = 5;
+    [SerializeField] LayerMask floorLayerMask;
+    [SerializeField] LayerMask portalLayerMask;
+
+    int playerAP;
+    const int playerDefaultAP = 1;
+    const int playerBurningAP = 100;
+
     int playerHp;
+    const int playerDefaultHp = 5;
+
+    int playerStamina;
+    const int playerDefaultStamina = 0;
+    const int playerAfterBurningStamina = 30;
+    const int playerMaxStamina = 100;
+    
     Vector3 destinationPosision;
     Quaternion destinationRotation;
-    //const int maxStemina = 100;
-    
     float speed = 10f;
     float h; //Axis for Horizontal
-    //int stemina;
+    
     Animator animator;
     Rigidbody rigid;
     bool isDie = false;
@@ -31,8 +39,11 @@ public class PlayerCtrl : MonoBehaviour {
     void Start () {
         rigid = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+
+        playerAP = playerDefaultAP;
         playerHp = playerDefaultHp;
-        //stemina = maxStemina;
+        playerStamina = playerDefaultStamina;
+        
         destinationPosision = Vector3.zero;
         destinationRotation = Quaternion.identity;
     }
@@ -42,9 +53,10 @@ public class PlayerCtrl : MonoBehaviour {
         Jumping();
         Attack();
         UsePortal();
-        //rotation
+        CheckStamina();
+        
     }
-    void Movement () {
+    void Movement () { //need rotation
         h = Input.GetAxis("Horizontal");
         if (h < -0.1f) {//Left
             animator.SetBool("Move", true);
@@ -62,20 +74,25 @@ public class PlayerCtrl : MonoBehaviour {
             if (isGround) {
                 animator.SetTrigger("Jump");
                 rigid.AddRelativeForce(new Vector3(0, 500f, 0)); //jump. rotate 수정 필요
+                Debug.Log("Player::Jump");
             }
         }
     }
     void Attack () {
         if (Input.GetKeyDown(KeyCode.W)) {
             animator.SetTrigger("Attack");
+            Debug.Log("Player::Attack");
+            //쿨타임 넣으려면 bool check 후 coroutine 실행
         }
     }
     void Die () {
         isDie = true;
         animator.SetBool("Die", true);
+        Debug.Log("Player::Die");
+        StopAllCoroutines();
     }
     void Hit (int damage) {
-        Debug.Log("Player Hit");
+        Debug.Log("Player::Hit");
         playerHp -= damage;
         if (playerHp < 0) {
             Die();
@@ -86,21 +103,47 @@ public class PlayerCtrl : MonoBehaviour {
             if (isPortalEnter) {
                 transform.position = destinationPosision;
                 transform.rotation = destinationRotation;
+                Debug.Log("Player::UsePortal move into " + destinationPosision);
             }
         }
     }
+    public void AddStamina () {
+        playerStamina += 14;
+        Debug.Log("Player::GetStamina");
+    }
+    void CheckStamina () {
+        if(playerStamina >= 100) {
+            playerStamina = playerMaxStamina;
+            StartCoroutine(Burning());
+        }
+    }
+    IEnumerator Burning () {
+        Debug.Log("Player::StartCoroutine::Burning");
+        playerAP = playerBurningAP;
+        yield return new WaitForSeconds(8.0f);
+        playerAP = playerDefaultAP;
+        playerStamina = playerAfterBurningStamina;
+        Debug.Log("Player::Burning End");
+    }
+    public int GetPlayerAP () {
+        return playerAP;
+    }
     private void OnTriggerEnter (Collider other) {
-        if(other.gameObject.tag == "Portal") { //포탈이면 좌표,회전값 복사
+        if (other.gameObject.tag == "Portal") { //포탈이면 좌표,회전값 복사
             isPortalEnter = true;
+            Debug.Log("Player::Enter Portal");
             destinationPosision = other.transform.position;
             destinationRotation = other.transform.rotation;
         }
-        if(other.gameObject.tag == "MonsterAttack") {
+        if (other.gameObject.tag == "MonsterAttack") {
             int damage = other.GetComponent<MonsterCtrl>().monsterAP;
             Hit(damage);
         }
     }
     private void OnTriggerExit (Collider other) {
-        if (other.gameObject.tag == "Portal") isPortalEnter = false;
+        if (other.gameObject.tag == "Portal") {
+            isPortalEnter = false;
+            Debug.Log("Player::Exit Portal");
+        }
     }
 }

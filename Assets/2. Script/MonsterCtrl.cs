@@ -13,6 +13,7 @@ public class MonsterCtrl : MonoBehaviour
     NavMeshAgent agent;
     Animator animator;
     PlayerCtrl player;
+    Rigidbody rigid;
 
     [HideInInspector] public int monsterAP = 1;
     int monsterHP;
@@ -71,12 +72,17 @@ public class MonsterCtrl : MonoBehaviour
     }
     private void OnCollisionEnter (Collision other) {
         if(other.gameObject.tag == "PlayerAttack") {
-            monsterHP -= player.playerAP;
+            int playerAP = player.GetPlayerAP();
+            monsterHP -= playerAP;
+            player.AddStamina();
             if (monsterHP <= 0) {
                 Death();
             } else {
                 animator.SetTrigger("IsHit");
             }
+        }
+        if (other.gameObject.tag == "DeadLine") {
+            Destroy(gameObject);
         }
     }
     void Death () {
@@ -85,6 +91,8 @@ public class MonsterCtrl : MonoBehaviour
         monsterState = MonsterState.Die;
         agent.isStopped = true;
         animator.SetTrigger("IsDie");
-        Destroy(gameObject, 2f);
+        rigid.constraints = RigidbodyConstraints.None;//no freeze
+        Vector3 flyVector = new Vector3(Random.Range(-1, 2), 1, Random.Range(-1, 2));// 랜덤하게
+        rigid.AddForce(flyVector * 1000f, ForceMode.Impulse);//날리기
     }
 }
