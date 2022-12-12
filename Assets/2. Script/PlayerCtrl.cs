@@ -9,6 +9,7 @@ using static UnityEngine.GraphicsBuffer;
 using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using UnityEngine.SceneManagement;
+using UnityEngine.Assertions.Must;
 
 public class PlayerCtrl : MonoBehaviour {
 
@@ -174,6 +175,7 @@ public class PlayerCtrl : MonoBehaviour {
         }
     }
     public void AddStamina () {
+        if (isDie) return;
         playerStamina += 14;
         Debug.Log("Player::GetStamina");
     }
@@ -195,6 +197,7 @@ public class PlayerCtrl : MonoBehaviour {
         return playerAP;
     }
     private void OnTriggerEnter (Collider other) {
+        if (isDie) return;
         if (other.gameObject.tag == "Portal") { //포탈이면 좌표,회전값 복사
             isPortalEnter = true;
             Debug.Log("Player::Enter Portal");
@@ -213,11 +216,12 @@ public class PlayerCtrl : MonoBehaviour {
     IEnumerator Hit (int damage) {
         playerHp -= damage;
         Debug.Log("Player::Hit");
-        if (playerHp < 0) Die();
+        if (playerHp <= 0) Die();
         yield return new WaitForSeconds(0.5f);
         isHit = false;
     }
     private void OnTriggerExit (Collider other) {
+        if (isDie) return;
         if (other.gameObject.tag == "Portal") {
             isPortalEnter = false;
             Debug.Log("Player::Exit Portal");
