@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public GameObject pauseMenuCanvas;
-    public GameObject Menu;
+   // public static bool GameIsPaused = false;
+    //public GameObject pauseMenuCanvas;
+    //public GameObject Menu;
 
     public void ClickStartBtn()
     {
@@ -21,12 +21,12 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
-    void Start()
-    {
-       Menu.SetActive(false);
-    }
+   // void Start()
+  //  {
+      // Menu.SetActive(false);
+   // }
 
-    void Update()
+   /* void Update()
 {
         if (Input.GetKeyDown(KeyCode.Escape))
         {  
@@ -66,4 +66,5 @@ public class UIManager : MonoBehaviour
         Debug.Log("아직 미구현입니다...");
         Application.Quit();
     }
+   */
 }
