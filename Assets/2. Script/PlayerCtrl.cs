@@ -11,6 +11,7 @@ using System.ComponentModel;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions.Must;
 
+
 public class PlayerCtrl : MonoBehaviour {
 
     public bool state;
@@ -170,6 +171,10 @@ public class PlayerCtrl : MonoBehaviour {
         animator.SetBool("Die", true);
         Debug.Log("Player::Die");
         StopAllCoroutines();
+
+        PlayerDie();
+
+
     }
     void UsePortal () {
         if (Input.GetKeyDown(KeyCode.G)) {
@@ -241,7 +246,12 @@ public class PlayerCtrl : MonoBehaviour {
         state = true;
     }
 
-    private void OnTriggerExit (Collider other) {
+    public void PlayerDie()
+    {
+        SceneManager.LoadScene("DieScene");
+    }
+    
+private void OnTriggerExit (Collider other) {
         if (isDie) return;
         if (other.gameObject.tag == "Portal") {
             isPortalEnter = false;

@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1. Scenes/GameScene_Yunz_Test.unity
     guid: ce831892052e6ba478229db483a71b0e
+  - enabled: 1
+    path: Assets/1. Scenes/DieScene.unity
+    guid: 88464760424c58141b7287038ac6276f
+  - enabled: 1
+    path: Assets/1. Scenes/ClearScene.unity
+    guid: 72b6b368aa71f6343a1325ac688ef3e1
   m_configObjects: {}
