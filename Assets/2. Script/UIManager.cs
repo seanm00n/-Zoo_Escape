@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-       Menu.SetActive(false);
+       //Menu.SetActive(false);
     }
 
     void Update()
