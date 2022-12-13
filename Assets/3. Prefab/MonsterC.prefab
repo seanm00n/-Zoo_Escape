@@ -456,6 +456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2791947726757938080}
+  - component: {fileID: 6354944866425228299}
   m_Layer: 0
   m_Name: mixamorig:RightHand
   m_TagString: Untagged
@@ -478,6 +479,20 @@ Transform:
   m_Father: {fileID: 2060413912697162176}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6354944866425228299
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919923368941850985}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 1.5
+  m_Direction: 0
+  m_Center: {x: -0.4, y: 0, z: -0.4}
 --- !u!1 &3076590279074435283
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +621,7 @@ Transform:
   m_GameObject: {fileID: 3731857578011590969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.816143, y: 4.1810503, z: 1.5164397}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 611249302498216031}
@@ -669,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51226bbb8e15ae843893f7552c4a5093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterAttackColl: {fileID: 0}
+  monsterAttackColl: {fileID: 6354944866425228299}
 --- !u!54 &4542814122262623561
 Rigidbody:
   m_ObjectHideFlags: 0

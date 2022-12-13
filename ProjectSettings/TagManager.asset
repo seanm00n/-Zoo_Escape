@@ -9,6 +9,8 @@ TagManager:
   - Monster
   - MonsterAttack
   - PlayerAttack
+  - Wall
+  - PortalV
   layers:
   - Default
   - TransparentFX

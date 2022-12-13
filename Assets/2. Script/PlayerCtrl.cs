@@ -51,6 +51,7 @@ public class PlayerCtrl : MonoBehaviour {
     bool isDie = false;
     bool isPortalEnter = false;
     bool isHorizontal = true;
+    bool isHorizontalCopy = true;
     bool isCoolTime = false;
     bool isHit = false;
     
@@ -91,7 +92,7 @@ public class PlayerCtrl : MonoBehaviour {
             animator.SetBool("Move", true);
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
             if (!isCoolTime) {
-                if (isHorizontal) {
+                if (isHorizontalCopy) {
                     child.transform.rotation = leftRotationH;
                 } else {
                     child.transform.rotation = leftRotationV;
@@ -101,7 +102,7 @@ public class PlayerCtrl : MonoBehaviour {
             animator.SetBool("Move", true);
             transform.Translate(Vector3.right * h * speed * Time.deltaTime, Space.Self);
             if (!isCoolTime) {
-                if (isHorizontal) {
+                if (isHorizontalCopy) {
                     child.transform.rotation = RightRotationH;
                 } else {
                     child.transform.rotation = RightRotationV;
@@ -169,7 +170,7 @@ public class PlayerCtrl : MonoBehaviour {
             if (isPortalEnter) {
                 transform.position = destinationPosision;
                 transform.rotation = destinationRotation;
-                isHorizontal = !isHorizontal;
+                isHorizontalCopy = isHorizontal;
                 Debug.Log("Player::UsePortal move into " + destinationPosision);
             }
         }
@@ -198,7 +199,8 @@ public class PlayerCtrl : MonoBehaviour {
     }
     private void OnTriggerEnter (Collider other) {
         if (isDie) return;
-        if (other.gameObject.tag == "Portal") { //포탈이면 좌표,회전값 복사
+        if (other.gameObject.tag == "Portal"|| other.gameObject.tag == "PortalV") { //포탈이면 좌표,회전값 복사
+            isHorizontal = (other.gameObject.tag == "Portal") ? true : false;
             isPortalEnter = true;
             Debug.Log("Player::Enter Portal");
             destinationPosision = other.transform.position;
