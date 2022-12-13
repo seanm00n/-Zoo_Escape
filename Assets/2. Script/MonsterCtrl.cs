@@ -17,12 +17,12 @@ public class MonsterCtrl : MonoBehaviour
 
     [SerializeField] CapsuleCollider monsterAttackColl;
     
-    const int monsterAP = 1;
+    const int monsterAP = 0;
 
     int monsterHP;
-    const int monsterDefaultHP = 3;
+    const int monsterDefaultHP = 2;
     const float attackDist = 3f;
-    const float traceDist = 20f;
+    const float traceDist = 50f;
     bool isDie = false;
     bool isAttack = false;
 
