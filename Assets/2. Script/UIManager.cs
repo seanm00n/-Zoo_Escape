@@ -9,15 +9,21 @@ public class UIManager : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuCanvas;
+    public GameObject Menu;
 
     public void ClickStartBtn()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("GameScene_Yunz_Test");
     }
 
     public void ClickMainBtn()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    void Start()
+    {
+       Menu.SetActive(false);
     }
 
     void Update()
