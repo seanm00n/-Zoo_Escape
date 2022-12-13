@@ -208,6 +208,11 @@ public class PlayerCtrl : MonoBehaviour {
     public int GetPlayerAP () {
         return playerAP;
     }
+    private void OnCollisionEnter (Collision collision) {
+        if (collision.gameObject.tag == "GotoClear") {
+            SceneManager.LoadScene("ClearScene");
+        }
+    }
     private void OnTriggerEnter (Collider other) {
         if (isDie) return;
         if (other.gameObject.tag == "Portal"|| other.gameObject.tag == "PortalV") { //포탈이면 좌표,회전값 복사

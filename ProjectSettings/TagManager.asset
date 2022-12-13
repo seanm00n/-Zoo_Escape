@@ -11,6 +11,8 @@ TagManager:
   - PlayerAttack
   - Wall
   - PortalV
+  - PlayerState
+  - GotoClear
   layers:
   - Default
   - TransparentFX
