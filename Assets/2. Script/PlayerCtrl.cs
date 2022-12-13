@@ -92,6 +92,9 @@ public class PlayerCtrl : MonoBehaviour {
         Attack();
         UsePortal();
         CheckStamina();
+        if (Input.GetKeyDown(KeyCode.P)) {
+            SceneManager.LoadScene("ClearScene");
+        }
     }
     void Movement () { //need rotation
         h = Input.GetAxis("Horizontal");
@@ -207,11 +210,6 @@ public class PlayerCtrl : MonoBehaviour {
     }
     public int GetPlayerAP () {
         return playerAP;
-    }
-    private void OnCollisionEnter (Collision collision) {
-        if (collision.gameObject.tag == "GotoClear") {
-            SceneManager.LoadScene("ClearScene");
-        }
     }
     private void OnTriggerEnter (Collider other) {
         if (isDie) return;
