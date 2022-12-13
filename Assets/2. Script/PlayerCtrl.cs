@@ -12,8 +12,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Assertions.Must;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+>>>>>>> parent of 5ccbffa (Scene_fin)
 =======
 >>>>>>> parent of 5ccbffa (Scene_fin)
 public class PlayerCtrl : MonoBehaviour {
@@ -240,6 +243,7 @@ public class PlayerCtrl : MonoBehaviour {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void PlayerDie()
     {
         SceneManager.LoadScene("DieScene");
@@ -251,6 +255,9 @@ private void OnTriggerExit (Collider other) {
 >>>>>>> parent of ce66083 (UI_setting)
     private void OnTriggerExit (Collider other) {
 >>>>>>> parent of ce66083 (UI_setting)
+=======
+    private void OnTriggerExit (Collider other) {
+>>>>>>> parent of 5ccbffa (Scene_fin)
 =======
     private void OnTriggerExit (Collider other) {
 >>>>>>> parent of 5ccbffa (Scene_fin)

@@ -124,6 +124,7 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:Assets/1. Scenes/ClearScene.unity
 --- !u!1 &33755339
 =======
@@ -205,6 +206,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33755339}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> parent of 5ccbffa (Scene_fin)
 =======
 >>>>>>> parent of 5ccbffa (Scene_fin)
 --- !u!1 &219141482

@@ -16,6 +16,7 @@ EditorBuildSettings:
     path: Assets/1. Scenes/GameScene_Yunz_Test.unity
     guid: ce831892052e6ba478229db483a71b0e
 <<<<<<< HEAD
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/1. Scenes/DieScene.unity
     guid: 88464760424c58141b7287038ac6276f
@@ -25,6 +26,8 @@ EditorBuildSettings:
 =======
   m_Scenes: []
 >>>>>>> parent of ce66083 (UI_setting)
+=======
+>>>>>>> parent of 5ccbffa (Scene_fin)
 =======
 >>>>>>> parent of 5ccbffa (Scene_fin)
   m_configObjects: {}
