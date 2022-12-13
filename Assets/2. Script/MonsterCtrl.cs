@@ -26,18 +26,20 @@ public class MonsterCtrl : MonoBehaviour
     bool isDie = false;
     bool isAttack = false;
 
-    private void Start () {
+   private void Start () {
+
         target = GameObject.Find("Player");
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
         player = target.GetComponent<PlayerCtrl>();
-        
+
         monsterHP = monsterDefaultHP;
         monsterAttackColl.enabled = false;
         StartCoroutine(CheckMonsterState()); //no need update() func
         StartCoroutine(MonsterAction());
     }
+
     IEnumerator CheckMonsterState () {
         while (!isDie)
         {
@@ -98,7 +100,8 @@ public class MonsterCtrl : MonoBehaviour
             }
         }
     }
-    void Death () {
+    void Death()
+    {
         StopAllCoroutines();
         isDie = true;
         monsterState = MonsterState.Die;
@@ -109,8 +112,7 @@ public class MonsterCtrl : MonoBehaviour
         rigid.isKinematic = false;
         Vector3 flyVector = new Vector3(Random.Range(-1, 2), 2f, Random.Range(-1, 2));// 랜덤하게
         rigid.AddForce(flyVector * 30f, ForceMode.Impulse);//날리기
-        Destroy(gameObject,2f);
+        Destroy(gameObject, 2f);
         Debug.Log("Monster::Die");
-    }
-    public int GetMonsterAP() { return monsterAP; }
+    }  public int GetMonsterAP() { return monsterAP; }
 }
