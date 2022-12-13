@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     public void ClickStartBtn()
     {
-        SceneManager.LoadScene("GameScene_Yunz_Test");
+        SceneManager.LoadScene("GameScene");
     }
 
     public void ClickMainBtn()
