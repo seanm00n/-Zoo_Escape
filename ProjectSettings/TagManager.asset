@@ -10,8 +10,11 @@ TagManager:
   - MonsterAttack
   - PlayerAttack
 <<<<<<< HEAD
+<<<<<<< HEAD
   - Wall
   - PortalV
+=======
+>>>>>>> parent of ce66083 (UI_setting)
 =======
 >>>>>>> parent of ce66083 (UI_setting)
   layers:

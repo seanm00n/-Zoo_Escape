@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,7 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD:Assets/1. Scenes/ClearScene.unity
 --- !u!1 &33755339
+=======
+--- !u!1 &2110881916
+>>>>>>> parent of ce66083 (UI_setting):Assets/1. Scenes/Main_Test.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,6 +135,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD:Assets/1. Scenes/ClearScene.unity
   - component: {fileID: 33755340}
   - component: {fileID: 33755342}
   - component: {fileID: 33755341}
@@ -530,6 +535,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1478082141}
   - component: {fileID: 1478082140}
+=======
+  - component: {fileID: 2110881918}
+  - component: {fileID: 2110881917}
+>>>>>>> parent of ce66083 (UI_setting):Assets/1. Scenes/Main_Test.unity
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged

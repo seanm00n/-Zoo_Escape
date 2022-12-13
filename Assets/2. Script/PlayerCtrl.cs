@@ -12,8 +12,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Assertions.Must;
 
 
+<<<<<<< HEAD
 public class PlayerCtrl : MonoBehaviour {
 
+=======
+>>>>>>> parent of ce66083 (UI_setting)
     [SerializeField] LayerMask floorLayerMask;
     [SerializeField] LayerMask portalLayerMask;
 
@@ -228,6 +231,7 @@ public class PlayerCtrl : MonoBehaviour {
         isHit = false;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     IEnumerator HitImg()
     {
         Target.SetActive(false);
@@ -243,6 +247,8 @@ public class PlayerCtrl : MonoBehaviour {
     
 private void OnTriggerExit (Collider other) {
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
     private void OnTriggerExit (Collider other) {
 >>>>>>> parent of ce66083 (UI_setting)
         if (isDie) return;

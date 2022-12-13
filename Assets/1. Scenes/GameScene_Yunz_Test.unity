@@ -124,7 +124,10 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 4552af14e755d6e429f7abe602cd34d1, type: 2}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
 --- !u!1001 &41421019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,6 +193,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e41f42f5e81b018479b0091156c9ecc6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 863ab454f80da6f4e9a86cfebbb3a15d, type: 3}
+<<<<<<< HEAD
+>>>>>>> parent of ce66083 (UI_setting)
+=======
 >>>>>>> parent of ce66083 (UI_setting)
 --- !u!1 &50609268
 GameObject:
@@ -418,7 +424,11 @@ CanvasRenderer:
   m_GameObject: {fileID: 274508683}
   m_CullTransparentMesh: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &292932990
+=======
+--- !u!1 &283524225
+>>>>>>> parent of ce66083 (UI_setting)
 =======
 --- !u!1 &283524225
 >>>>>>> parent of ce66083 (UI_setting)
@@ -430,17 +440,23 @@ GameObject:
   serializedVersion: 6
   m_Component:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - component: {fileID: 292932993}
   - component: {fileID: 292932992}
   - component: {fileID: 292932991}
   m_Layer: 0
   m_Name: EventSystem
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
   - component: {fileID: 283524226}
   - component: {fileID: 283524228}
   - component: {fileID: 283524227}
   m_Layer: 5
   m_Name: MonHP_0
+<<<<<<< HEAD
+>>>>>>> parent of ce66083 (UI_setting)
+=======
 >>>>>>> parent of ce66083 (UI_setting)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,8 +464,13 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &292932991
 MonoBehaviour:
+=======
+--- !u!224 &283524226
+RectTransform:
+>>>>>>> parent of ce66083 (UI_setting)
 =======
 --- !u!224 &283524226
 RectTransform:
@@ -458,6 +479,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
   m_GameObject: {fileID: 292932990}
   m_Enabled: 1
@@ -500,15 +522,22 @@ Transform:
   m_GameObject: {fileID: 283524225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
 >>>>>>> parent of ce66083 (UI_setting)
+=======
+  m_GameObject: {fileID: 283524225}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+>>>>>>> parent of ce66083 (UI_setting)
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
   m_Father: {fileID: 1701534769}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -555,6 +584,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 283524225}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
+>>>>>>> parent of ce66083 (UI_setting)
+=======
 >>>>>>> parent of ce66083 (UI_setting)
 --- !u!1 &326126526
 GameObject:
@@ -1045,7 +1077,10 @@ RectTransform:
   - {fileID: 610764993}
   - {fileID: 1864366663}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 168882541}
+=======
+>>>>>>> parent of ce66083 (UI_setting)
 =======
 >>>>>>> parent of ce66083 (UI_setting)
   m_Father: {fileID: 0}
@@ -1130,7 +1165,10 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
 --- !u!1 &1151069580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,10 +1429,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
   pauseMenuCanvas: {fileID: 0}
   Menu: {fileID: 0}
 --- !u!4 &1659844935
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
   m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
@@ -1419,6 +1460,9 @@ MonoBehaviour:
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1653259090
+<<<<<<< HEAD
+>>>>>>> parent of ce66083 (UI_setting)
+=======
 >>>>>>> parent of ce66083 (UI_setting)
 Transform:
   m_ObjectHideFlags: 0
@@ -1724,7 +1768,10 @@ Transform:
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of ce66083 (UI_setting)
 --- !u!1 &1701534768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1850,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1701534768}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
+>>>>>>> parent of ce66083 (UI_setting)
+=======
 >>>>>>> parent of ce66083 (UI_setting)
 --- !u!1 &1864366662
 GameObject:
@@ -2084,11 +2134,14 @@ PrefabInstance:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dd356c08992d704fb0f4baa34fed234, type: 3}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1222828365909376769 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6537208189502629394, guid: 322a818074219a747b5160ae048026de, type: 3}
   m_PrefabInstance: {fileID: 5350434540782917907}
   m_PrefabAsset: {fileID: 0}
+=======
+>>>>>>> parent of ce66083 (UI_setting)
 =======
 >>>>>>> parent of ce66083 (UI_setting)
 --- !u!1001 &2644402485621178440

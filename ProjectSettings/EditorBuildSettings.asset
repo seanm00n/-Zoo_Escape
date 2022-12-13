@@ -4,6 +4,7 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Scenes:
   - enabled: 1
     path: Assets/1. Scenes/MainScene.unity
@@ -20,4 +21,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1. Scenes/ClearScene.unity
     guid: 72b6b368aa71f6343a1325ac688ef3e1
+=======
+  m_Scenes: []
+>>>>>>> parent of ce66083 (UI_setting)
   m_configObjects: {}
