@@ -9,8 +9,11 @@ TagManager:
   - Monster
   - MonsterAttack
   - PlayerAttack
+<<<<<<< HEAD
   - Wall
   - PortalV
+=======
+>>>>>>> parent of ce66083 (UI_setting)
   layers:
   - Default
   - TransparentFX

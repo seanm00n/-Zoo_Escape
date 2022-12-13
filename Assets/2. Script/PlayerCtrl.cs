@@ -14,9 +14,6 @@ using UnityEngine.Assertions.Must;
 
 public class PlayerCtrl : MonoBehaviour {
 
-    public bool state;
-    public GameObject Target;
-
     [SerializeField] LayerMask floorLayerMask;
     [SerializeField] LayerMask portalLayerMask;
 
@@ -60,8 +57,6 @@ public class PlayerCtrl : MonoBehaviour {
     bool isHit = false;
     
     void Start () {
-        state = true;
-
         rigid = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         child = transform.GetChild(0).gameObject;
@@ -85,7 +80,6 @@ public class PlayerCtrl : MonoBehaviour {
 
     }
     void Update () {
-
         if (isDie) { return; }
         Movement();
         Jumping();
@@ -224,20 +218,16 @@ public class PlayerCtrl : MonoBehaviour {
                 isHit = true;
                 StartCoroutine(Hit(damage));
             }
-            if(state)
-            {
-                state = false;
-                StartCoroutine(HitImg());
-            }
         }
     }
-    IEnumerator Hit (int damage) {   
+    IEnumerator Hit (int damage) {
         playerHp -= damage;
         Debug.Log("Player::Hit");
         if (playerHp <= 0) Die();
         yield return new WaitForSeconds(0.5f);
         isHit = false;
     }
+<<<<<<< HEAD
     IEnumerator HitImg()
     {
         Target.SetActive(false);
@@ -252,6 +242,9 @@ public class PlayerCtrl : MonoBehaviour {
     }
     
 private void OnTriggerExit (Collider other) {
+=======
+    private void OnTriggerExit (Collider other) {
+>>>>>>> parent of ce66083 (UI_setting)
         if (isDie) return;
         if (other.gameObject.tag == "Portal") {
             isPortalEnter = false;
