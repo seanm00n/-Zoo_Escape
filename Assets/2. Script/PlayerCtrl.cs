@@ -11,8 +11,11 @@ using System.ComponentModel;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions.Must;
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+>>>>>>> parent of 5ccbffa (Scene_fin)
 public class PlayerCtrl : MonoBehaviour {
 
 =======
@@ -168,10 +171,6 @@ public class PlayerCtrl : MonoBehaviour {
         animator.SetBool("Die", true);
         Debug.Log("Player::Die");
         StopAllCoroutines();
-
-        PlayerDie();
-
-
     }
     void UsePortal () {
         if (Input.GetKeyDown(KeyCode.G)) {
@@ -240,6 +239,7 @@ public class PlayerCtrl : MonoBehaviour {
         state = true;
     }
 
+<<<<<<< HEAD
     public void PlayerDie()
     {
         SceneManager.LoadScene("DieScene");
@@ -251,6 +251,9 @@ private void OnTriggerExit (Collider other) {
 >>>>>>> parent of ce66083 (UI_setting)
     private void OnTriggerExit (Collider other) {
 >>>>>>> parent of ce66083 (UI_setting)
+=======
+    private void OnTriggerExit (Collider other) {
+>>>>>>> parent of 5ccbffa (Scene_fin)
         if (isDie) return;
         if (other.gameObject.tag == "Portal") {
             isPortalEnter = false;
