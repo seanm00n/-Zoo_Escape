@@ -110,8 +110,8 @@ public class MonsterCtrl : MonoBehaviour
         GetComponent<SphereCollider>().enabled = false;
         rigid.constraints = RigidbodyConstraints.None;//no freeze
         rigid.isKinematic = false;
-        Vector3 flyVector = new Vector3(Random.Range(-1, 2), 2f, Random.Range(-1, 2));// ·£´ýÇÏ°Ô
-        rigid.AddForce(flyVector * 30f, ForceMode.Impulse);//³¯¸®±â
+        Vector3 flyVector = new Vector3(Random.Range(-1, 2), 2f, Random.Range(-1, 2));// ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+        rigid.AddForce(flyVector * 30f, ForceMode.Impulse);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Destroy(gameObject, 2f);
         Debug.Log("Monster::Die");
     }  public int GetMonsterAP() { return monsterAP; }

@@ -58,12 +58,12 @@ public class UIManager : MonoBehaviour
 
     public void BackBtn()
     {
-        Debug.Log("¾ÆÁ÷ ¹Ì±¸ÇöÀÔ´Ï´Ù...");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½...");
     }
 
     public void SoundBtn()
     {
-        Debug.Log("¾ÆÁ÷ ¹Ì±¸ÇöÀÔ´Ï´Ù...");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ì±ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½...");
         Application.Quit();
     }
    */

@@ -14,7 +14,7 @@ public class CameraCtrl : MonoBehaviour
     }
 
     private void LateUpdate () {
-        //LateUpdate´Â Updateº¸´Ù ÀûÀº ºóµµ·Î È£ÃâµÊ
+        //LateUpdateï¿½ï¿½ Updateï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½óµµ·ï¿½ È£ï¿½ï¿½ï¿½
         transform.position = Vector3.Lerp(transform.position,
                                    target.position - (target.forward * dist) + (Vector3.up * height),
                                    Time.deltaTime * dampTraec);
