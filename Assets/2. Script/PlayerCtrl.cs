@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
-using TreeEditor;
+//using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
-using Newtonsoft.Json.Serialization;
+//using Newtonsoft.Json.Serialization;
 using System.ComponentModel;
 using UnityEngine.SceneManagement;
 using UnityEngine.Assertions.Must;
@@ -127,7 +127,7 @@ public class PlayerCtrl : MonoBehaviour {
             bool isGround = Physics.Raycast(transform.position, Vector3.down, 1.0f, floorLayerMask);
             if (isGround) {
                 animator.SetTrigger("Jump");
-                rigid.AddRelativeForce(new Vector3(0, 500f, 0)); //jump. rotate ¼öÁ¤ ÇÊ¿ä
+                rigid.AddRelativeForce(new Vector3(0, 500f, 0)); //jump. rotate ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
                 Debug.Log("Player::Jump");
             }
         }
@@ -213,7 +213,7 @@ public class PlayerCtrl : MonoBehaviour {
     }
     private void OnTriggerEnter (Collider other) {
         if (isDie) return;
-        if (other.gameObject.tag == "Portal"|| other.gameObject.tag == "PortalV") { //Æ÷Å»ÀÌ¸é ÁÂÇ¥,È¸Àü°ª º¹»ç
+        if (other.gameObject.tag == "Portal"|| other.gameObject.tag == "PortalV") { //ï¿½ï¿½Å»ï¿½Ì¸ï¿½ ï¿½ï¿½Ç¥,È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             isHorizontal = (other.gameObject.tag == "Portal") ? true : false;
             isPortalEnter = true;
             Debug.Log("Player::Enter Portal");
@@ -222,7 +222,7 @@ public class PlayerCtrl : MonoBehaviour {
         }
         if (other.gameObject.tag == "MonsterAttack") {
             if (!isHit) {
-                int damage = other.GetComponentInParent<MonsterCtrl>().GetMonsterAP(); //¸®¼Ò½º ³Ê¹« ¸¹ÀÌ¸ÔÀ½
+                int damage = other.GetComponentInParent<MonsterCtrl>().GetMonsterAP(); //ï¿½ï¿½ï¿½Ò½ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½
                 other.enabled = false;
                 isHit = true;
                 StartCoroutine(Hit(damage));
